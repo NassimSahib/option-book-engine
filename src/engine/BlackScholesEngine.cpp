@@ -20,4 +20,27 @@ double BlackScholesEngine::computePrice(const Option& option, double S, double r
     }
 }
 
+double BlackScholesEngine::computeDelta(const Option& option, double S, double r, double sigma) const {
+    double T = option.getMaturity();
+    double K = option.getStrike();
+    double d1 = (std::log(S / K) + (r + 0.5 * sigma * sigma) * T) / (sigma * std::sqrt(T));
+
+    if (option.getType() == OptionType::Call) {
+        return norm_cdf(d1); // Call Delta
+    } else {
+        return norm_cdf(d1) - 1;  // Put Delta
+    }
+}
+
+double BlackScholesEngine::computeVega(const Option& option, double S, double r, double sigma) const {
+    double T = option.getMaturity();
+    double K = option.getStrike();
+    double d1 = (std::log(S / K) * (r + 0.5 * sigma * sigma) * T) / (sigma * std::sqrt(T));
+    double vega = S * std::sqrt(T) * (1.0 / std::sqrt(2 * M_PI)) * std::exp(-0.5 * d1 * d1);
+
+    return vega / 100.0; // by +1% volatility
+
+}
+
+
 // TO ADD -> METHODE computeDelta et METHODE computeVega !

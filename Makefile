@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++2b -Wall -I./src
-SRC = src/main.cpp src/engine/Option.cpp src/engine/PricingEngine.cpp
+SRC = src/main.cpp src/engine/Option.cpp src/engine/BlackScholesEngine.cpp
 BIN = bin/main
 
 all: $(BIN)

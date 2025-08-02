@@ -10,7 +10,12 @@ int main() {
     double sigma = 0.2;
 
     double price = engine.computePrice(call, S, r, sigma);
-    std::cout << "Call price via Pricing Engine: " << price << std::endl;
+    double delta = engine.computeDelta(call, S, r, sigma);
+    double vega = engine.computeVega(call, S, r, sigma);
+
+    std::cout << "Call price via BS Pricing Engine: " << price << std::endl;
+    std::cout << "Delta via BS Pricing Engine: " << delta << std::endl;
+    std::cout << "Vega via BS Pricing Engine: " << vega << std::endl;
 
     return 0;
 }
