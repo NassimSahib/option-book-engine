@@ -1,14 +1,16 @@
 #include <iostream>
-#include "engine/Option.h"
+#include "engine/BlackScholesEngine.h"
 
 int main() {
-    Option callOption(100.0, 1.0, OptionType::Call);  // strike, maturity (1 an), call
-    double callPrice = callOption.price(105.0, 0.05, 0.2);  // S=105, r=5%, sigma=20%
-    std::cout << "Call price: " << callPrice << std::endl;
+    Option call(100.0, 1.0, OptionType::Call);  // strike, maturity (1 an), call
+    BlackScholesEngine engine;
 
-    Option putOption(100.0, 1.0, OptionType::Put);
-    double putPrice = putOption.price(105.0, 0.05, 0.2);
-    std::cout << "Put price: " << putPrice << std::endl;
+    double S = 100.0;
+    double r = 0.05;
+    double sigma = 0.2;
+
+    double price = engine.computePrice(call, S, r, sigma);
+    std::cout << "Call price via Pricing Engine: " << price << std::endl;
 
     return 0;
 }

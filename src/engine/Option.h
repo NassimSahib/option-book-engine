@@ -17,8 +17,6 @@ public:
     double getMaturity() const;
     OptionType getType() const;
 
-    double price(double S, double r, double sigma) const; // Black-Scholes pricing
-
 private:
     double strike_;
     double maturity_;
